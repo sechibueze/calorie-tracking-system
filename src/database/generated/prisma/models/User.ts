@@ -250,6 +250,7 @@ export type UserWhereInput = {
   deletedAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   role?: Prisma.XOR<Prisma.RoleScalarRelationFilter, Prisma.RoleWhereInput>
   foodEntries?: Prisma.FoodEntryListRelationFilter
+  accessTokens?: Prisma.AccessTokenListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -264,6 +265,7 @@ export type UserOrderByWithRelationInput = {
   deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   role?: Prisma.RoleOrderByWithRelationInput
   foodEntries?: Prisma.FoodEntryOrderByRelationAggregateInput
+  accessTokens?: Prisma.AccessTokenOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -281,6 +283,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   deletedAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   role?: Prisma.XOR<Prisma.RoleScalarRelationFilter, Prisma.RoleWhereInput>
   foodEntries?: Prisma.FoodEntryListRelationFilter
+  accessTokens?: Prisma.AccessTokenListRelationFilter
 }, "id" | "email">
 
 export type UserOrderByWithAggregationInput = {
@@ -326,6 +329,7 @@ export type UserCreateInput = {
   deletedAt?: Date | string | null
   role: Prisma.RoleCreateNestedOneWithoutUsersInput
   foodEntries?: Prisma.FoodEntryCreateNestedManyWithoutUserInput
+  accessTokens?: Prisma.AccessTokenCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -339,6 +343,7 @@ export type UserUncheckedCreateInput = {
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   foodEntries?: Prisma.FoodEntryUncheckedCreateNestedManyWithoutUserInput
+  accessTokens?: Prisma.AccessTokenUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserUpdateInput = {
@@ -352,6 +357,7 @@ export type UserUpdateInput = {
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.RoleUpdateOneRequiredWithoutUsersNestedInput
   foodEntries?: Prisma.FoodEntryUpdateManyWithoutUserNestedInput
+  accessTokens?: Prisma.AccessTokenUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -365,6 +371,7 @@ export type UserUncheckedUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   foodEntries?: Prisma.FoodEntryUncheckedUpdateManyWithoutUserNestedInput
+  accessTokens?: Prisma.AccessTokenUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -511,6 +518,20 @@ export type IntFieldUpdateOperationsInput = {
   divide?: number
 }
 
+export type UserCreateNestedOneWithoutAccessTokensInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutAccessTokensInput, Prisma.UserUncheckedCreateWithoutAccessTokensInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutAccessTokensInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutAccessTokensNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutAccessTokensInput, Prisma.UserUncheckedCreateWithoutAccessTokensInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutAccessTokensInput
+  upsert?: Prisma.UserUpsertWithoutAccessTokensInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutAccessTokensInput, Prisma.UserUpdateWithoutAccessTokensInput>, Prisma.UserUncheckedUpdateWithoutAccessTokensInput>
+}
+
 export type UserCreateNestedOneWithoutFoodEntriesInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutFoodEntriesInput, Prisma.UserUncheckedCreateWithoutFoodEntriesInput>
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutFoodEntriesInput
@@ -535,6 +556,7 @@ export type UserCreateWithoutRoleInput = {
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   foodEntries?: Prisma.FoodEntryCreateNestedManyWithoutUserInput
+  accessTokens?: Prisma.AccessTokenCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutRoleInput = {
@@ -547,6 +569,7 @@ export type UserUncheckedCreateWithoutRoleInput = {
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   foodEntries?: Prisma.FoodEntryUncheckedCreateNestedManyWithoutUserInput
+  accessTokens?: Prisma.AccessTokenUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutRoleInput = {
@@ -590,6 +613,74 @@ export type UserScalarWhereInput = {
   deletedAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
 }
 
+export type UserCreateWithoutAccessTokensInput = {
+  id?: string
+  email: string
+  name: string
+  password: string
+  dailyCalorieLimit?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  role: Prisma.RoleCreateNestedOneWithoutUsersInput
+  foodEntries?: Prisma.FoodEntryCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutAccessTokensInput = {
+  id?: string
+  email: string
+  name: string
+  password: string
+  dailyCalorieLimit?: number
+  roleId: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  foodEntries?: Prisma.FoodEntryUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutAccessTokensInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutAccessTokensInput, Prisma.UserUncheckedCreateWithoutAccessTokensInput>
+}
+
+export type UserUpsertWithoutAccessTokensInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutAccessTokensInput, Prisma.UserUncheckedUpdateWithoutAccessTokensInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutAccessTokensInput, Prisma.UserUncheckedCreateWithoutAccessTokensInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutAccessTokensInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutAccessTokensInput, Prisma.UserUncheckedUpdateWithoutAccessTokensInput>
+}
+
+export type UserUpdateWithoutAccessTokensInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  dailyCalorieLimit?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  role?: Prisma.RoleUpdateOneRequiredWithoutUsersNestedInput
+  foodEntries?: Prisma.FoodEntryUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutAccessTokensInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  dailyCalorieLimit?: Prisma.IntFieldUpdateOperationsInput | number
+  roleId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  foodEntries?: Prisma.FoodEntryUncheckedUpdateManyWithoutUserNestedInput
+}
+
 export type UserCreateWithoutFoodEntriesInput = {
   id?: string
   email: string
@@ -600,6 +691,7 @@ export type UserCreateWithoutFoodEntriesInput = {
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   role: Prisma.RoleCreateNestedOneWithoutUsersInput
+  accessTokens?: Prisma.AccessTokenCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutFoodEntriesInput = {
@@ -612,6 +704,7 @@ export type UserUncheckedCreateWithoutFoodEntriesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
+  accessTokens?: Prisma.AccessTokenUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutFoodEntriesInput = {
@@ -640,6 +733,7 @@ export type UserUpdateWithoutFoodEntriesInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.RoleUpdateOneRequiredWithoutUsersNestedInput
+  accessTokens?: Prisma.AccessTokenUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutFoodEntriesInput = {
@@ -652,6 +746,7 @@ export type UserUncheckedUpdateWithoutFoodEntriesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  accessTokens?: Prisma.AccessTokenUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateManyRoleInput = {
@@ -675,6 +770,7 @@ export type UserUpdateWithoutRoleInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   foodEntries?: Prisma.FoodEntryUpdateManyWithoutUserNestedInput
+  accessTokens?: Prisma.AccessTokenUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutRoleInput = {
@@ -687,6 +783,7 @@ export type UserUncheckedUpdateWithoutRoleInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   foodEntries?: Prisma.FoodEntryUncheckedUpdateManyWithoutUserNestedInput
+  accessTokens?: Prisma.AccessTokenUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateManyWithoutRoleInput = {
@@ -707,10 +804,12 @@ export type UserUncheckedUpdateManyWithoutRoleInput = {
 
 export type UserCountOutputType = {
   foodEntries: number
+  accessTokens: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   foodEntries?: boolean | UserCountOutputTypeCountFoodEntriesArgs
+  accessTokens?: boolean | UserCountOutputTypeCountAccessTokensArgs
 }
 
 /**
@@ -730,6 +829,13 @@ export type UserCountOutputTypeCountFoodEntriesArgs<ExtArgs extends runtime.Type
   where?: Prisma.FoodEntryWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountAccessTokensArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.AccessTokenWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -743,6 +849,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   deletedAt?: boolean
   role?: boolean | Prisma.RoleDefaultArgs<ExtArgs>
   foodEntries?: boolean | Prisma.User$foodEntriesArgs<ExtArgs>
+  accessTokens?: boolean | Prisma.User$accessTokensArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -788,6 +895,7 @@ export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = run
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   role?: boolean | Prisma.RoleDefaultArgs<ExtArgs>
   foodEntries?: boolean | Prisma.User$foodEntriesArgs<ExtArgs>
+  accessTokens?: boolean | Prisma.User$accessTokensArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -802,6 +910,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   objects: {
     role: Prisma.$RolePayload<ExtArgs>
     foodEntries: Prisma.$FoodEntryPayload<ExtArgs>[]
+    accessTokens: Prisma.$AccessTokenPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1209,6 +1318,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   readonly [Symbol.toStringTag]: "PrismaPromise"
   role<T extends Prisma.RoleDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.RoleDefaultArgs<ExtArgs>>): Prisma.Prisma__RoleClient<runtime.Types.Result.GetResult<Prisma.$RolePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   foodEntries<T extends Prisma.User$foodEntriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$foodEntriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FoodEntryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  accessTokens<T extends Prisma.User$accessTokensArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$accessTokensArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AccessTokenPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1669,6 +1779,30 @@ export type User$foodEntriesArgs<ExtArgs extends runtime.Types.Extensions.Intern
   take?: number
   skip?: number
   distinct?: Prisma.FoodEntryScalarFieldEnum | Prisma.FoodEntryScalarFieldEnum[]
+}
+
+/**
+ * User.accessTokens
+ */
+export type User$accessTokensArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the AccessToken
+   */
+  select?: Prisma.AccessTokenSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the AccessToken
+   */
+  omit?: Prisma.AccessTokenOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AccessTokenInclude<ExtArgs> | null
+  where?: Prisma.AccessTokenWhereInput
+  orderBy?: Prisma.AccessTokenOrderByWithRelationInput | Prisma.AccessTokenOrderByWithRelationInput[]
+  cursor?: Prisma.AccessTokenWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.AccessTokenScalarFieldEnum | Prisma.AccessTokenScalarFieldEnum[]
 }
 
 /**

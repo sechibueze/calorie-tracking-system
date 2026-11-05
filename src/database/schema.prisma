@@ -61,6 +61,7 @@ model User {
   deletedAt DateTime?
   role      Role      @relation(fields: [roleId], references: [id], onDelete: Restrict)
   foodEntries FoodEntry[]
+  accessTokens AccessToken[]
   @@index([roleId])
   @@map("users")
 }
@@ -69,13 +70,13 @@ model AccessToken {
   id         String    @id @default(uuid(7)) @db.Uuid
   userId     String    @db.Uuid
   name       String
-  tokenHash  String    @unique
+  tokenHash  String    
   expiresAt  DateTime?
   lastUsedAt DateTime?
   createdAt  DateTime  @default(now())
   updatedAt  DateTime  @updatedAt
   deletedAt  DateTime?
-  // user       User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user       User      @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([userId])
   @@map("access_tokens")

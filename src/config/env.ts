@@ -10,6 +10,7 @@ const boolString = z
 const envSchema = z.object({
   NODE_ENV: z.enum(['development', 'test', 'production']).default('development'),
   SERVICE_NAME: z.string().min(1).default('calorie-api'),
+  SEED_ADMIN_TOKEN: z.string().min(1).default('calorie.test'),
   PORT: z.coerce.number().int().min(1).max(65535).default(3000),
   LOG_LEVEL: z.enum(['error', 'warn', 'info', 'http', 'debug']).default('info'),
   TRUST_PROXY: boolString,
