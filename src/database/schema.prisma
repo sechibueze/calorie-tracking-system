@@ -16,6 +16,7 @@ model Role {
   deletedAt   DateTime?
 
   permissions RolePermission[]
+  users User[]
 
   @@map("roles")
 }
@@ -46,4 +47,52 @@ model RolePermission {
   @@unique([roleId, permissionId])
   @@index([permissionId])
   @@map("role_permissions")
+}
+
+model User {
+  id        String    @id @default(uuid(7)) @db.Uuid
+  email     String    @unique
+  name      String
+  password      String
+  dailyCalorieLimit Int @default(2100)
+  roleId    String    @db.Uuid
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+  role      Role      @relation(fields: [roleId], references: [id], onDelete: Restrict)
+  foodEntries FoodEntry[]
+  @@index([roleId])
+  @@map("users")
+}
+
+model AccessToken {
+  id         String    @id @default(uuid(7)) @db.Uuid
+  userId     String    @db.Uuid
+  name       String
+  tokenHash  String    @unique
+  expiresAt  DateTime?
+  lastUsedAt DateTime?
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+  deletedAt  DateTime?
+  // user       User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@map("access_tokens")
+}
+
+model FoodEntry {
+  id         String    @id @default(uuid(7)) @db.Uuid
+  userId     String    @db.Uuid
+  name       String
+  calories   Int
+  consumedAt DateTime
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+  deletedAt  DateTime?
+  user       User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, consumedAt])
+  @@index([createdAt])
+  @@map("food_entries")
 }
