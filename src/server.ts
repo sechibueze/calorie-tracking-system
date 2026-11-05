@@ -1,6 +1,7 @@
 import { createApp } from './app';
 import { env } from '@/config/env';
 import { logger } from './config/logger';
+import { disconnectDB } from './database/db';
 
 const app = createApp();
 
@@ -30,8 +31,14 @@ function shutdown(signal: string, exitCode = 0): void {
       logger.error('error while closing server', { err });
       process.exit(1);
     }
-    logger.info('shutdown complete');
-    process.exit(exitCode);
+
+    disconnectDB()
+    .catch((closeErr: unknown) => logger.error('error while closing database', { closeErr }))
+    .finally(() => {
+      logger.info('shutdown complete');
+      process.exit(exitCode);
+    });
+   
   });
 }
 
