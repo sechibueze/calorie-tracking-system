@@ -3,9 +3,10 @@ FROM node:22-alpine AS build
 WORKDIR /app
 COPY package*.json ./
 RUN npm ci
-COPY tsconfig*.json ./
+COPY tsconfig*.json prisma.config.ts ./
 COPY src ./src
-RUN npm run build && npm prune --omit=dev
+RUN DATABASE_URL=postgresql://build:build@localhost:5432/build npx prisma generate \
+    && npm run build && npm prune --omit=dev
 
 # ---------- runtime ----------
 FROM node:22-alpine AS runtime
