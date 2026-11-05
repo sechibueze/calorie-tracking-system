@@ -12,4 +12,4 @@ apiRouter.get('/', (_req, res) => {
 
 apiRouter.use('/auth', authRouter)
 apiRouter.use('/users', userRouter)
-apiRouter.use('/users', entryRouter)
+apiRouter.use('/entries', entryRouter)

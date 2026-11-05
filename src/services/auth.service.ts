@@ -36,3 +36,12 @@ export async function authenticateToken(
     tokenId: record.id,
   };
 }
+
+export const describeCaller = (auth: AuthContext) => ({
+  id: auth.user.id,
+  email: auth.user.email,
+  name: auth.user.name,
+  dailyCalorieLimit: auth.user.dailyCalorieLimit,
+  role: auth.role,
+  permissions: [...auth.permissions].sort(),
+});

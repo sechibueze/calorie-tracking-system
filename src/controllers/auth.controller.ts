@@ -1,13 +1,6 @@
 import type { Request, Response } from 'express';
-
+import * as authService from '@/services/auth.service'
+import { sendSuccess } from '@/utils/http-response.util';
 export function getCurrentUser(req: Request, res: Response) {
-  const auth = req.auth!;
-  return res.status(200).json( {
-    id: auth.user.id,
-    email: auth.user.email,
-    name: auth.user.name,
-    dailyCalorieLimit: auth.user.dailyCalorieLimit,
-    role: auth.role,
-    permissions: [...auth.permissions].sort(),
-  })
+  return sendSuccess(res, authService.describeCaller(req.auth!))
 }

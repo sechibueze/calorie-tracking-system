@@ -21,7 +21,7 @@ export async function summary(req: Request, res: Response): Promise<void> {
 }
 
 export async function get(req: Request, res: Response): Promise<void> {
-  sendSuccess(res, await entryService.getEntry(req.auth!, req.params.id as string);
+  sendSuccess(res, await entryService.getEntry(req.auth!, req.params.id as string));
 }
 
 export async function update(req: Request, res: Response): Promise<void> {
