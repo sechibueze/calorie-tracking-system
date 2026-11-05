@@ -70,7 +70,7 @@ model AccessToken {
   id         String    @id @default(uuid(7)) @db.Uuid
   userId     String    @db.Uuid
   name       String
-  tokenHash  String    @unique
+  tokenHash  String    
   expiresAt  DateTime?
   lastUsedAt DateTime?
   createdAt  DateTime  @default(now())

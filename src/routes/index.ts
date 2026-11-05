@@ -2,6 +2,7 @@ import { Router } from 'express';
 import { env } from '../config/env';
 import { authRouter } from './auth.route';
 import { userRouter } from './user.route';
+import { entryRouter } from './entry.route';
 
 export const apiRouter = Router();
 
@@ -10,4 +11,5 @@ apiRouter.get('/', (_req, res) => {
 })
 
 apiRouter.use('/auth', authRouter)
-apiRouter.use('/auth', userRouter)
+apiRouter.use('/users', userRouter)
+apiRouter.use('/users', entryRouter)

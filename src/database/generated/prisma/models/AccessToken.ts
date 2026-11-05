@@ -232,19 +232,19 @@ export type AccessTokenOrderByWithRelationInput = {
 
 export type AccessTokenWhereUniqueInput = Prisma.AtLeast<{
   id?: string
-  tokenHash?: string
   AND?: Prisma.AccessTokenWhereInput | Prisma.AccessTokenWhereInput[]
   OR?: Prisma.AccessTokenWhereInput[]
   NOT?: Prisma.AccessTokenWhereInput | Prisma.AccessTokenWhereInput[]
   userId?: Prisma.UuidFilter<"AccessToken"> | string
   name?: Prisma.StringFilter<"AccessToken"> | string
+  tokenHash?: Prisma.StringFilter<"AccessToken"> | string
   expiresAt?: Prisma.DateTimeNullableFilter<"AccessToken"> | Date | string | null
   lastUsedAt?: Prisma.DateTimeNullableFilter<"AccessToken"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"AccessToken"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"AccessToken"> | Date | string
   deletedAt?: Prisma.DateTimeNullableFilter<"AccessToken"> | Date | string | null
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
-}, "id" | "tokenHash">
+}, "id">
 
 export type AccessTokenOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
