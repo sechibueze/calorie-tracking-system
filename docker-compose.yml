@@ -1,0 +1,82 @@
+name: ${COMPOSE_PROJECT_NAME:-calorie}
+
+services:
+  postgres:
+    # image: postgres:${POSTGRES_VERSION:-16-alpine}
+    image: pgvector/pgvector:pg17
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-calorie}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-calorie}
+      POSTGRES_DB: ${POSTGRES_DB:-calorie}
+    ports:
+      - "${POSTGRES_HOST_PORT:-5433}:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - pg_isready -U ${POSTGRES_USER:-calorie} -d ${POSTGRES_DB:-calorie}
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  redis:
+    image: redis:${REDIS_VERSION:-7-alpine}
+    restart: unless-stopped
+    command:
+      - redis-server
+      - --appendonly
+      - "yes"
+      - --maxmemory-policy
+      - ${REDIS_MAXMEMORY_POLICY:-noeviction}
+    ports:
+      - "${REDIS_HOST_PORT:-6380}:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  prometheus:
+    image: prom/prometheus:${PROMETHEUS_VERSION:-latest}
+    restart: unless-stopped
+    ports:
+      - "${PROMETHEUS_HOST_PORT:-9091}:9090"
+    volumes:
+      - ${PROMETHEUS_CONFIG_PATH:-./prometheus/prometheus.yml}:/etc/prometheus/prometheus.yml:ro
+      - prometheus_data:/prometheus
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+  app:
+    build:
+      context: .
+      dockerfile: ${DOCKERFILE_PATH:-Dockerfile}
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    environment:
+      NODE_ENV: ${NODE_ENV:-production}
+      PORT: ${APP_PORT:-5000}
+      SERVICE_NAME: ${SERVICE_NAME:-calorie-api}
+      LOG_LEVEL: ${LOG_LEVEL:-info}
+      TRUST_PROXY: ${TRUST_PROXY:-false}
+      DATABASE_URL: postgresql://${POSTGRES_USER:-calorie}:${POSTGRES_PASSWORD:-calorie}@postgres:5432/${POSTGRES_DB:-calorie}?schema=public
+      REDIS_URL: redis://redis:6379
+      CORS_ORIGINS: ${CORS_ORIGINS:-http://localhost:5173,http://localhost:3001}
+      DEFAULT_DAILY_CALORIE_LIMIT: ${DEFAULT_DAILY_CALORIE_LIMIT:-2100}
+      FDC_BASE_URL: ${FDC_BASE_URL:-https://api.nal.usda.gov/fdc/v1}
+      FDC_API_KEY: ${FDC_API_KEY:-DEMO_KEY}
+    ports:
+      - "${APP_HOST_PORT:-5000}:${APP_PORT:-5000}"
+
+volumes:
+  postgres_data:
+  redis_data:
+  prometheus_data:
