@@ -3,6 +3,7 @@ import onHeaders from 'on-headers';
 import {
   Gauge,
   Histogram,
+  Counter,
   Registry,
   collectDefaultMetrics,
 } from '@prometheus-io/client';
@@ -83,3 +84,33 @@ export const metricsHandler: RequestHandler = async (
     next(error);
   }
 };
+
+
+export const outboundRequestDuration = new Histogram({
+  name: 'outbound_http_request_duration_seconds',
+  help: 'Duration of outbound HTTP calls by client, method and status',
+  labelNames: ['client', 'method', 'status'] as const,
+  buckets: [0.05, 0.1, 0.25, 0.5, 1, 2.5, 5, 10],
+  registers: [registry],
+});
+
+export const outboundRetries = new Counter({
+  name: 'outbound_http_retries_total',
+  help: 'Outbound HTTP calls that were retried',
+  labelNames: ['client'] as const,
+  registers: [registry],
+});
+
+export const breakerState = new Gauge({
+  name: 'circuit_breaker_state',
+  help: 'Circuit breaker state: 0 closed, 1 half-open, 2 open',
+  labelNames: ['name'] as const,
+  registers: [registry],
+});
+
+export const breakerEvents = new Counter({
+  name: 'circuit_breaker_events_total',
+  help: 'Circuit breaker events (success, failure, timeout, reject, open, close, halfOpen)',
+  labelNames: ['name', 'event'] as const,
+  registers: [registry],
+});
