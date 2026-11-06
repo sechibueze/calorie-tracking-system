@@ -93,6 +93,10 @@ model FoodEntry {
   deletedAt  DateTime?
   user       User      @relation(fields: [userId], references: [id], onDelete: Cascade)
 
+  fdcId         Int?
+  brand         String?
+  quantityGrams Int?
+  
   @@index([userId, consumedAt])
   @@index([createdAt])
   @@map("food_entries")

@@ -1,8 +1,19 @@
-import type { Request, Response } from 'express';
+import type { Request, Response, NextFunction } from 'express';
 import { sendSuccess } from '@/utils/http-response.util';
 import type { CreateEntryBody, ListEntriesQuery, SummaryQuery, UpdateEntryBody } from '@/schema/entry.schema';
 import * as entryService from '@/services/entry.service';
+import type { SuggestQuery } from '@/schema/entry.schema';
 
+
+export async function suggest(req: Request, res: Response, next: NextFunction): Promise<void> {
+  try {
+    const { q } = req.query;
+    const { suggestions, degraded } = await entryService.suggestFoods(q, req.correlationId);
+    res.status(200).json({ success: true, data: suggestions, meta: { degraded } });
+  } catch (err) {
+    next(err);
+  }
+}
 
 export async function create(req: Request, res: Response): Promise<void> {
   const entry = await entryService.createEntry(req.auth!, req.body as CreateEntryBody);

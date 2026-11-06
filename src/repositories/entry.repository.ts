@@ -16,13 +16,17 @@ export interface DailyTotal {
   totalCalories: number;
   entryCount: number;
 }
-
+export interface FdcDetails {
+  fdcId?: number | null;
+  brand?: string | null;
+  quantityGrams?: number | null;
+}
 export const createEntry = (data: {
   userId: string;
   name: string;
   calories: number;
   consumedAt: Date;
-}): Promise<FoodEntry> => db.foodEntry.create({ data });
+} & FdcDetails): Promise<FoodEntry> => db.foodEntry.create({ data });
 
 export const findEntry = (id: string, userId?: string): Promise<FoodEntry | null> =>
   db.foodEntry.findFirst({ where: { id, ...scope(userId) } });
@@ -48,7 +52,7 @@ export async function listEntries(
 
 export async function updateEntry(
   id: string,
-  data: Partial<{ name: string; calories: number; consumedAt: Date }>,
+  data: Partial<{ name: string; calories: number; consumedAt: Date } & FdcDetails>,
   userId?: string,
 ): Promise<FoodEntry | null> {
   try {

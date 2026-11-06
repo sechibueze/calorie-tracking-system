@@ -17,10 +17,21 @@ const consumedAt = z.iso
     message: 'consumedAt cannot be in the future',
   });
 
-export const createEntryBody = z.strictObject({ name, calories, consumedAt: consumedAt.optional() });
+  const fdcId = z.number().int().positive();
+const brand = z.string().min(1).max(100);
+const quantityGrams = z
+  .number()
+  .int('quantityGrams must be a whole number')
+  .min(1, 'quantityGrams must be at least 1')
+  .max(10_000, 'quantityGrams cannot exceed 10000');
+export const createEntryBody = z.strictObject({ name, calories, consumedAt: consumedAt.optional(),  fdcId: fdcId.optional(),
+  brand: brand.optional(),
+  quantityGrams: quantityGrams.optional(), });
 
 export const updateEntryBody = z
-  .strictObject({ name: name.optional(), calories: calories.optional(), consumedAt: consumedAt.optional() })
+  .strictObject({ name: name.optional(), calories: calories.optional(), consumedAt: consumedAt.optional(), fdcId: fdcId.nullable().optional(),
+    brand: brand.nullable().optional(),
+    quantityGrams: quantityGrams.nullable().optional(),})
   .refine((body) => Object.keys(body).length > 0, { message: 'Provide at least one field to update' });
 
 export const entryIdParams = z.object({ id: z.uuid('id must be a valid UUID') });
@@ -49,6 +60,11 @@ export const summaryQuery = z
   .object({ dateFrom: day.optional(), dateTo: day.optional(), timezone })
   .refine(rangeIsOrdered, rangeError);
 
+export const suggestQuery = z.object({
+  q: z.string().min(2, 'q must be at least 2 characters').max(100, 'q must be at most 100 characters'),
+});
+
+export type SuggestQuery = z.output<typeof suggestQuery>;
 export type CreateEntryBody = z.output<typeof createEntryBody>;
 export type UpdateEntryBody = z.output<typeof updateEntryBody>;
 export type ListEntriesQuery = z.output<typeof listEntriesQuery>;

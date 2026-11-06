@@ -4,6 +4,9 @@ import type { AuthContext } from '@/schema/auth.schema';
 import type { CreateEntryBody, ListEntriesQuery, SummaryQuery, UpdateEntryBody } from '@/schema/entry.schema';
 import * as repo from '@/repositories/entry.repository';
 import { NotFoundError } from '@/utils/http-error.util';
+import { searchFoodsWithBreaker } from '@/libs/fdc.breaker';
+import type { FoodSuggestion } from '@/libs/fdc.client';
+import { logger } from '@/config/logger';
 
 export const toEntryDto = (e: FoodEntry) => ({
   id: e.id,
@@ -22,6 +25,9 @@ export async function createEntry(auth: AuthContext, input: CreateEntryBody) {
     name: input.name,
     calories: input.calories,
     consumedAt: input.consumedAt ?? new Date(),
+    fdcId: input.fdcId,
+    brand: input.brand,
+    quantityGrams: input.quantityGrams,
   });
   return toEntryDto(entry);
 }
@@ -77,4 +83,20 @@ export async function getDailySummary(auth: AuthContext, query: SummaryQuery) {
     limitReached: t.totalCalories >= limit,
     overBy: Math.max(0, t.totalCalories - limit),
   }));
+}
+
+
+export interface SuggestionResult {
+  suggestions: FoodSuggestion[];
+  degraded: boolean;
+}
+
+export async function suggestFoods(query: string, correlationId: string): Promise<SuggestionResult> {
+  try {
+    const suggestions = await searchFoodsWithBreaker(query, correlationId);
+    return { suggestions, degraded: false };
+  } catch (err) {
+    logger.warn('FDC unavailable, falling back to manual entry', { err, query });
+    return { suggestions: [], degraded: true };
+  }
 }

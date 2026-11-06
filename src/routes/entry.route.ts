@@ -19,6 +19,14 @@ const canWrite = requirePermission(PERMISSIONS.ENTRIES_WRITE_OWN);
 
 entryRouter.use(authenticate);
 
+
+entryRouter.get(
+  '/suggest',
+  requirePermission(PERMISSIONS.AUTOCOMPLETE_READ),
+  validateRequest(suggestQuery, 'query'),
+  entryController.suggest,
+);
+
 entryRouter.get('/', canRead, validateRequest(listEntriesQuery, 'query'), entryController.list);
 // Declared before '/:id' so "summary" is not treated as an id.
 entryRouter.get('/summary', canRead, validateRequest(summaryQuery, 'query'), entryController.summary);
