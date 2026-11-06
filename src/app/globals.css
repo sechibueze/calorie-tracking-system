@@ -1,0 +1,45 @@
+/* @import '@fontsource/poppins/400.css';
+@import '@fontsource/poppins/500.css';
+@import '@fontsource/poppins/600.css';
+@import '@fontsource/poppins/700.css'; */
+@import '@fontsource/poppins/latin.css';
+@import 'tailwindcss';
+
+/* ==========================================================================
+   Brand configuration -
+   ========================================================================== */
+:root {
+  --brand-primary: #03864f;
+  --brand-secondary: #f7e34a; /* lemon */
+  --brand-font: 'Poppins';
+}
+
+@theme inline {
+  --font-sans: var(--brand-font), ui-sans-serif, system-ui, sans-serif;
+
+  --color-primary: var(--brand-primary);
+  --color-primary-50: color-mix(in oklab, var(--brand-primary) 7%, white);
+  --color-primary-100: color-mix(in oklab, var(--brand-primary) 14%, white);
+  --color-primary-200: color-mix(in oklab, var(--brand-primary) 28%, white);
+  --color-primary-300: color-mix(in oklab, var(--brand-primary) 46%, white);
+  --color-primary-400: color-mix(in oklab, var(--brand-primary) 72%, white);
+  --color-primary-500: var(--brand-primary);
+  --color-primary-600: color-mix(in oklab, var(--brand-primary) 88%, black);
+  --color-primary-700: color-mix(in oklab, var(--brand-primary) 74%, black);
+  --color-primary-800: color-mix(in oklab, var(--brand-primary) 60%, black);
+  --color-primary-900: color-mix(in oklab, var(--brand-primary) 46%, black);
+
+  --color-secondary: var(--brand-secondary);
+  --color-secondary-50: color-mix(in oklab, var(--brand-secondary) 12%, white);
+  --color-secondary-100: color-mix(in oklab, var(--brand-secondary) 24%, white);
+  --color-secondary-200: color-mix(in oklab, var(--brand-secondary) 44%, white);
+  --color-secondary-300: color-mix(in oklab, var(--brand-secondary) 70%, white);
+  --color-secondary-400: color-mix(in oklab, var(--brand-secondary) 92%, white);
+  --color-secondary-500: var(--brand-secondary);
+  --color-secondary-600: color-mix(in oklab, var(--brand-secondary) 88%, black);
+  --color-secondary-700: color-mix(in oklab, var(--brand-secondary) 70%, black);
+}
+
+body {
+  @apply bg-white font-sans text-neutral-900 antialiased;
+}
