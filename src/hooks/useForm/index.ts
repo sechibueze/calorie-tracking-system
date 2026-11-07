@@ -44,6 +44,9 @@ export function useForm<TValues extends Record<string, string>, TOutput>(
     },
   });
 
+  const setValue = <K extends keyof TValues>(name: K, value: TValues[K]) =>
+  setValues((current) => ({ ...current, [name]: value }));
+
   const showServerError = (err: unknown) => {
     if (err instanceof ApiError) {
       const fieldErrors = err.fieldErrors as Errors<TValues>;
@@ -72,5 +75,5 @@ export function useForm<TValues extends Record<string, string>, TOutput>(
       }
     };
 
-  return { values, errors, formError, isSubmitting, field, handleSubmit };
+  return { values, errors, formError, isSubmitting, field, setValue, handleSubmit };;
 }
