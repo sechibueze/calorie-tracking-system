@@ -26,7 +26,7 @@ interface FdcFood {
 const http = createHttpClient({
   name: 'fdc',
   baseURL: env.FDC_BASE_URL,
-  timeoutMs: 3000,
+  // timeoutMs: 30000,
   retries: 2,
 });
 

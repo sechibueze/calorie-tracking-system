@@ -8,7 +8,7 @@ import type { SuggestQuery } from '@/schema/entry.schema';
 export async function suggest(req: Request, res: Response, next: NextFunction): Promise<void> {
   try {
     const { q } = req.query;
-    const { suggestions, degraded } = await entryService.suggestFoods(q, req.correlationId);
+    const { suggestions, degraded } = await entryService.suggestFoods(q as string, req.correlationId);
     res.status(200).json({ success: true, data: suggestions, meta: { degraded } });
   } catch (err) {
     next(err);

@@ -6,7 +6,7 @@ import { outboundRequestDuration, outboundRetries } from '@/observability/http.m
 export interface HttpClientOptions {
   name: string;
   baseURL: string;
-  timeoutMs: number;
+  timeoutMs?: number;
   retries: number;
   retryDelayMs?: number;
 }
