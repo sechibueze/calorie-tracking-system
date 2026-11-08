@@ -6,6 +6,7 @@ import {
   createEntryBody,
   entryIdParams,
   listEntriesQuery,
+  suggestQuery,
   summaryQuery,
   updateEntryBody,
 } from '@/schema/entry.schema';
@@ -28,6 +29,7 @@ entryRouter.get(
 );
 
 entryRouter.get('/', canRead, validateRequest(listEntriesQuery, 'query'), entryController.list);
+
 // Declared before '/:id' so "summary" is not treated as an id.
 entryRouter.get('/summary', canRead, validateRequest(summaryQuery, 'query'), entryController.summary);
 entryRouter.post('/', canWrite, validateRequest(createEntryBody), entryController.create);

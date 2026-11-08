@@ -5,3 +5,4 @@ import { authenticate } from '@/middleware/auth.middleware';
 export const authRouter = Router();
 
 authRouter.get('/me', authenticate, authController.getCurrentUser);
+authRouter.post('/',  authController.login);

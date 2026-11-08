@@ -28,10 +28,14 @@ export type AggregateFoodEntry = {
 
 export type FoodEntryAvgAggregateOutputType = {
   calories: number | null
+  fdcId: number | null
+  quantityGrams: number | null
 }
 
 export type FoodEntrySumAggregateOutputType = {
   calories: number | null
+  fdcId: number | null
+  quantityGrams: number | null
 }
 
 export type FoodEntryMinAggregateOutputType = {
@@ -43,6 +47,9 @@ export type FoodEntryMinAggregateOutputType = {
   createdAt: Date | null
   updatedAt: Date | null
   deletedAt: Date | null
+  fdcId: number | null
+  brand: string | null
+  quantityGrams: number | null
 }
 
 export type FoodEntryMaxAggregateOutputType = {
@@ -54,6 +61,9 @@ export type FoodEntryMaxAggregateOutputType = {
   createdAt: Date | null
   updatedAt: Date | null
   deletedAt: Date | null
+  fdcId: number | null
+  brand: string | null
+  quantityGrams: number | null
 }
 
 export type FoodEntryCountAggregateOutputType = {
@@ -65,16 +75,23 @@ export type FoodEntryCountAggregateOutputType = {
   createdAt: number
   updatedAt: number
   deletedAt: number
+  fdcId: number
+  brand: number
+  quantityGrams: number
   _all: number
 }
 
 
 export type FoodEntryAvgAggregateInputType = {
   calories?: true
+  fdcId?: true
+  quantityGrams?: true
 }
 
 export type FoodEntrySumAggregateInputType = {
   calories?: true
+  fdcId?: true
+  quantityGrams?: true
 }
 
 export type FoodEntryMinAggregateInputType = {
@@ -86,6 +103,9 @@ export type FoodEntryMinAggregateInputType = {
   createdAt?: true
   updatedAt?: true
   deletedAt?: true
+  fdcId?: true
+  brand?: true
+  quantityGrams?: true
 }
 
 export type FoodEntryMaxAggregateInputType = {
@@ -97,6 +117,9 @@ export type FoodEntryMaxAggregateInputType = {
   createdAt?: true
   updatedAt?: true
   deletedAt?: true
+  fdcId?: true
+  brand?: true
+  quantityGrams?: true
 }
 
 export type FoodEntryCountAggregateInputType = {
@@ -108,6 +131,9 @@ export type FoodEntryCountAggregateInputType = {
   createdAt?: true
   updatedAt?: true
   deletedAt?: true
+  fdcId?: true
+  brand?: true
+  quantityGrams?: true
   _all?: true
 }
 
@@ -206,6 +232,9 @@ export type FoodEntryGroupByOutputType = {
   createdAt: Date
   updatedAt: Date
   deletedAt: Date | null
+  fdcId: number | null
+  brand: string | null
+  quantityGrams: number | null
   _count: FoodEntryCountAggregateOutputType | null
   _avg: FoodEntryAvgAggregateOutputType | null
   _sum: FoodEntrySumAggregateOutputType | null
@@ -240,6 +269,9 @@ export type FoodEntryWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"FoodEntry"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"FoodEntry"> | Date | string
   deletedAt?: Prisma.DateTimeNullableFilter<"FoodEntry"> | Date | string | null
+  fdcId?: Prisma.IntNullableFilter<"FoodEntry"> | number | null
+  brand?: Prisma.StringNullableFilter<"FoodEntry"> | string | null
+  quantityGrams?: Prisma.IntNullableFilter<"FoodEntry"> | number | null
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
 }
 
@@ -252,6 +284,9 @@ export type FoodEntryOrderByWithRelationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  fdcId?: Prisma.SortOrderInput | Prisma.SortOrder
+  brand?: Prisma.SortOrderInput | Prisma.SortOrder
+  quantityGrams?: Prisma.SortOrderInput | Prisma.SortOrder
   user?: Prisma.UserOrderByWithRelationInput
 }
 
@@ -267,6 +302,9 @@ export type FoodEntryWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"FoodEntry"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"FoodEntry"> | Date | string
   deletedAt?: Prisma.DateTimeNullableFilter<"FoodEntry"> | Date | string | null
+  fdcId?: Prisma.IntNullableFilter<"FoodEntry"> | number | null
+  brand?: Prisma.StringNullableFilter<"FoodEntry"> | string | null
+  quantityGrams?: Prisma.IntNullableFilter<"FoodEntry"> | number | null
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
 }, "id">
 
@@ -279,6 +317,9 @@ export type FoodEntryOrderByWithAggregationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  fdcId?: Prisma.SortOrderInput | Prisma.SortOrder
+  brand?: Prisma.SortOrderInput | Prisma.SortOrder
+  quantityGrams?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.FoodEntryCountOrderByAggregateInput
   _avg?: Prisma.FoodEntryAvgOrderByAggregateInput
   _max?: Prisma.FoodEntryMaxOrderByAggregateInput
@@ -298,6 +339,9 @@ export type FoodEntryScalarWhereWithAggregatesInput = {
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"FoodEntry"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"FoodEntry"> | Date | string
   deletedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"FoodEntry"> | Date | string | null
+  fdcId?: Prisma.IntNullableWithAggregatesFilter<"FoodEntry"> | number | null
+  brand?: Prisma.StringNullableWithAggregatesFilter<"FoodEntry"> | string | null
+  quantityGrams?: Prisma.IntNullableWithAggregatesFilter<"FoodEntry"> | number | null
 }
 
 export type FoodEntryCreateInput = {
@@ -308,6 +352,9 @@ export type FoodEntryCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
+  fdcId?: number | null
+  brand?: string | null
+  quantityGrams?: number | null
   user: Prisma.UserCreateNestedOneWithoutFoodEntriesInput
 }
 
@@ -320,6 +367,9 @@ export type FoodEntryUncheckedCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
+  fdcId?: number | null
+  brand?: string | null
+  quantityGrams?: number | null
 }
 
 export type FoodEntryUpdateInput = {
@@ -330,6 +380,9 @@ export type FoodEntryUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  fdcId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  brand?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  quantityGrams?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   user?: Prisma.UserUpdateOneRequiredWithoutFoodEntriesNestedInput
 }
 
@@ -342,6 +395,9 @@ export type FoodEntryUncheckedUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  fdcId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  brand?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  quantityGrams?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type FoodEntryCreateManyInput = {
@@ -353,6 +409,9 @@ export type FoodEntryCreateManyInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
+  fdcId?: number | null
+  brand?: string | null
+  quantityGrams?: number | null
 }
 
 export type FoodEntryUpdateManyMutationInput = {
@@ -363,6 +422,9 @@ export type FoodEntryUpdateManyMutationInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  fdcId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  brand?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  quantityGrams?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type FoodEntryUncheckedUpdateManyInput = {
@@ -374,6 +436,9 @@ export type FoodEntryUncheckedUpdateManyInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  fdcId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  brand?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  quantityGrams?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type FoodEntryListRelationFilter = {
@@ -395,10 +460,15 @@ export type FoodEntryCountOrderByAggregateInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrder
+  fdcId?: Prisma.SortOrder
+  brand?: Prisma.SortOrder
+  quantityGrams?: Prisma.SortOrder
 }
 
 export type FoodEntryAvgOrderByAggregateInput = {
   calories?: Prisma.SortOrder
+  fdcId?: Prisma.SortOrder
+  quantityGrams?: Prisma.SortOrder
 }
 
 export type FoodEntryMaxOrderByAggregateInput = {
@@ -410,6 +480,9 @@ export type FoodEntryMaxOrderByAggregateInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrder
+  fdcId?: Prisma.SortOrder
+  brand?: Prisma.SortOrder
+  quantityGrams?: Prisma.SortOrder
 }
 
 export type FoodEntryMinOrderByAggregateInput = {
@@ -421,10 +494,15 @@ export type FoodEntryMinOrderByAggregateInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrder
+  fdcId?: Prisma.SortOrder
+  brand?: Prisma.SortOrder
+  quantityGrams?: Prisma.SortOrder
 }
 
 export type FoodEntrySumOrderByAggregateInput = {
   calories?: Prisma.SortOrder
+  fdcId?: Prisma.SortOrder
+  quantityGrams?: Prisma.SortOrder
 }
 
 export type FoodEntryCreateNestedManyWithoutUserInput = {
@@ -469,6 +547,14 @@ export type FoodEntryUncheckedUpdateManyWithoutUserNestedInput = {
   deleteMany?: Prisma.FoodEntryScalarWhereInput | Prisma.FoodEntryScalarWhereInput[]
 }
 
+export type NullableIntFieldUpdateOperationsInput = {
+  set?: number | null
+  increment?: number
+  decrement?: number
+  multiply?: number
+  divide?: number
+}
+
 export type FoodEntryCreateWithoutUserInput = {
   id?: string
   name: string
@@ -477,6 +563,9 @@ export type FoodEntryCreateWithoutUserInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
+  fdcId?: number | null
+  brand?: string | null
+  quantityGrams?: number | null
 }
 
 export type FoodEntryUncheckedCreateWithoutUserInput = {
@@ -487,6 +576,9 @@ export type FoodEntryUncheckedCreateWithoutUserInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
+  fdcId?: number | null
+  brand?: string | null
+  quantityGrams?: number | null
 }
 
 export type FoodEntryCreateOrConnectWithoutUserInput = {
@@ -527,6 +619,9 @@ export type FoodEntryScalarWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"FoodEntry"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"FoodEntry"> | Date | string
   deletedAt?: Prisma.DateTimeNullableFilter<"FoodEntry"> | Date | string | null
+  fdcId?: Prisma.IntNullableFilter<"FoodEntry"> | number | null
+  brand?: Prisma.StringNullableFilter<"FoodEntry"> | string | null
+  quantityGrams?: Prisma.IntNullableFilter<"FoodEntry"> | number | null
 }
 
 export type FoodEntryCreateManyUserInput = {
@@ -537,6 +632,9 @@ export type FoodEntryCreateManyUserInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
+  fdcId?: number | null
+  brand?: string | null
+  quantityGrams?: number | null
 }
 
 export type FoodEntryUpdateWithoutUserInput = {
@@ -547,6 +645,9 @@ export type FoodEntryUpdateWithoutUserInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  fdcId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  brand?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  quantityGrams?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type FoodEntryUncheckedUpdateWithoutUserInput = {
@@ -557,6 +658,9 @@ export type FoodEntryUncheckedUpdateWithoutUserInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  fdcId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  brand?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  quantityGrams?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type FoodEntryUncheckedUpdateManyWithoutUserInput = {
@@ -567,6 +671,9 @@ export type FoodEntryUncheckedUpdateManyWithoutUserInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  fdcId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  brand?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  quantityGrams?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 
@@ -580,6 +687,9 @@ export type FoodEntrySelect<ExtArgs extends runtime.Types.Extensions.InternalArg
   createdAt?: boolean
   updatedAt?: boolean
   deletedAt?: boolean
+  fdcId?: boolean
+  brand?: boolean
+  quantityGrams?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["foodEntry"]>
 
@@ -592,6 +702,9 @@ export type FoodEntrySelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ext
   createdAt?: boolean
   updatedAt?: boolean
   deletedAt?: boolean
+  fdcId?: boolean
+  brand?: boolean
+  quantityGrams?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["foodEntry"]>
 
@@ -604,6 +717,9 @@ export type FoodEntrySelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ext
   createdAt?: boolean
   updatedAt?: boolean
   deletedAt?: boolean
+  fdcId?: boolean
+  brand?: boolean
+  quantityGrams?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["foodEntry"]>
 
@@ -616,9 +732,12 @@ export type FoodEntrySelectScalar = {
   createdAt?: boolean
   updatedAt?: boolean
   deletedAt?: boolean
+  fdcId?: boolean
+  brand?: boolean
+  quantityGrams?: boolean
 }
 
-export type FoodEntryOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "name" | "calories" | "consumedAt" | "createdAt" | "updatedAt" | "deletedAt", ExtArgs["result"]["foodEntry"]>
+export type FoodEntryOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "name" | "calories" | "consumedAt" | "createdAt" | "updatedAt" | "deletedAt" | "fdcId" | "brand" | "quantityGrams", ExtArgs["result"]["foodEntry"]>
 export type FoodEntryInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
@@ -643,6 +762,9 @@ export type $FoodEntryPayload<ExtArgs extends runtime.Types.Extensions.InternalA
     createdAt: Date
     updatedAt: Date
     deletedAt: Date | null
+    fdcId: number | null
+    brand: string | null
+    quantityGrams: number | null
   }, ExtArgs["result"]["foodEntry"]>
   composites: {}
 }
@@ -1075,6 +1197,9 @@ export interface FoodEntryFieldRefs {
   readonly createdAt: Prisma.FieldRef<"FoodEntry", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"FoodEntry", 'DateTime'>
   readonly deletedAt: Prisma.FieldRef<"FoodEntry", 'DateTime'>
+  readonly fdcId: Prisma.FieldRef<"FoodEntry", 'Int'>
+  readonly brand: Prisma.FieldRef<"FoodEntry", 'String'>
+  readonly quantityGrams: Prisma.FieldRef<"FoodEntry", 'Int'>
 }
     
 

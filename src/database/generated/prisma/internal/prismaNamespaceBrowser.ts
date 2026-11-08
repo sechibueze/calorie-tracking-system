@@ -149,7 +149,10 @@ export const FoodEntryScalarFieldEnum = {
   consumedAt: 'consumedAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
-  deletedAt: 'deletedAt'
+  deletedAt: 'deletedAt',
+  fdcId: 'fdcId',
+  brand: 'brand',
+  quantityGrams: 'quantityGrams'
 } as const
 
 export type FoodEntryScalarFieldEnum = (typeof FoodEntryScalarFieldEnum)[keyof typeof FoodEntryScalarFieldEnum]

@@ -14,16 +14,23 @@ export interface CreateUserData {
 }
 export type UpdateUserData = Partial<CreateUserData>;
 
+
 const isPrismaError = (err: unknown, code: string): boolean =>
   err instanceof Prisma.PrismaClientKnownRequestError && err.code === code;
 
+export const getUserRole = (roleName: string = 'USER') => db.role.findFirst({where: { name: roleName}});
 export const getUserById = (id: string): Promise<UserWithRole | null> =>
   db.user.findFirst({ where: { id, deletedAt: null }, include });
 
+export const getUsersByIds = (ids: string[]) =>
+  db.user.findMany({
+    where: { id: { in: ids } },
+    select: { id: true, email: true, name: true },
+  });
 export const getUserByEmail = (email: string): Promise<UserWithRole | null> =>
   db.user.findFirst({
     where: { email: email.trim().toLowerCase(), deletedAt: null },
-    include,
+    include: { role: true}
   });
 
 export const listUsers = (): Promise<UserWithRole[]> =>

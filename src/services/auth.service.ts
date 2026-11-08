@@ -1,9 +1,55 @@
 import { logger } from "@/config/logger";
-import { findActiveTokenByHash, touchLastUsed } from "@/repositories/access-token.repository";
-import { AuthContext } from "@/schema/auth.schema";
-import { hashToken } from "@/utils/hash.util";
-
+import { createAccessToken, findActiveTokenByHash, touchLastUsed } from "@/repositories/access-token.repository";
+import { AuthContext, LoginInput } from "@/schema/auth.schema";
+import { generateAccessToken, hashAccessToken, hashToken, verifyPassword } from "@/utils/hash.util";
+import * as userRepository from '@/repositories/user.repository'
+import { NotFoundError, UnauthorizedError } from "@/utils/http-error.util";
 const LAST_USED_REFRESH_MS = 5 * 60_000;
+
+
+export const loginUser = async (
+  input: LoginInput,
+) => {
+  const user = await userRepository.getUserByEmail(input.email);
+
+  if (!user) {
+    throw new NotFoundError('Invalid email or password.');
+  }
+
+  const passwordIsValid = await verifyPassword(
+    user.password,
+    input.password,
+  );
+
+  if (!passwordIsValid) {
+    throw new UnauthorizedError('Invalid email or password.', 401);
+  }
+
+  const token = generateAccessToken();
+  const tokenHash = hashAccessToken(token);
+
+  const expiresAt = new Date();
+
+  expiresAt.setDate(
+    expiresAt.getDate() + 2,
+  );
+
+  await createAccessToken( {
+    userId: user.id,
+    name: input.deviceName ?? 'Unknown device',
+    tokenHash,
+    expiresAt,
+  });
+
+  const { password: _, ...userDetails } = user;
+
+  return {
+    user: userDetails,
+    token,
+    tokenType: 'Bearer',
+    expiresAt,
+  };
+};
 
 export async function authenticateToken(
   rawToken: string,
