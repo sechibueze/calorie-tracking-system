@@ -14,8 +14,8 @@ const EMPTY_PERMISSIONS: string[] = [];
 
 /** Fixed on large screens, a slide-in drawer on small ones. Admin links only for admins. */
 export function Sidebar({ open, onClose }: SidebarProps) {
-  const permissions = useAuthStore((s) => s.user?.permissions ?? EMPTY_PERMISSIONS);
-  const items = navigation.filter((item) => !item.permission || permissions.includes(item.permission));
+  const permission = useAuthStore((s) => s.user?.role.name);
+  const items = navigation.filter((item) => !item.permission || permission === item.permission);
   const sections = [...new Set(items.map((i) => i.section ?? ''))];
 
   return (

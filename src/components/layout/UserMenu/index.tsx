@@ -43,7 +43,7 @@ export function UserMenu() {
           <div className="px-3 py-2">
             <p className="truncate text-sm font-semibold">{user.name}</p>
             <p className="truncate text-xs text-neutral-500">{user.email}</p>
-            <Badge tone="success" className="mt-2">{user.role}</Badge>
+            <Badge tone="success" className="mt-2">{user.role.name}</Badge>
           </div>
           <div className="my-1 border-t border-neutral-100" />
           <Link role="menuitem" href="/profile" onClick={() => setOpen(false)} className="flex items-center gap-2 rounded-lg px-3 py-2 text-sm hover:bg-neutral-100">

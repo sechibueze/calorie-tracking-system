@@ -1,5 +1,4 @@
 'use client';
-
 import { Avatar } from '@/components/ui/Avatar';
 import { Badge } from '@/components/ui/Badge';
 import { Card } from '@/components/ui/Card';
@@ -25,7 +24,7 @@ export function ProfileView() {
           <Avatar name={user.name} size="lg" />
           <div>
             <h2 className="text-xl font-semibold">{user.name}</h2>
-            <Badge tone="success" className="mt-1">{user.role}</Badge>
+            <Badge tone="success" className="mt-1">{user.role.name}</Badge>
           </div>
         </div>
         <dl className="mt-8 divide-y divide-neutral-100 text-sm">
@@ -38,9 +37,9 @@ export function ProfileView() {
           <div className="grid gap-1 py-3 sm:grid-cols-3">
             <dt className="text-neutral-500">Access</dt>
             <dd className="flex flex-wrap gap-2 sm:col-span-2">
-              {[...user.permissions].sort().map((p) => (
-                <Badge key={p}>{humanizePermission(p)}</Badge>
-              ))}
+              {/* {[...user.permissions].sort().map((p) => ( */}
+                <Badge >{user.role.name}</Badge>
+              {/* // ))} */}
             </dd>
           </div>
         </dl>

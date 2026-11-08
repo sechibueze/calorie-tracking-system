@@ -6,7 +6,7 @@ export const metadata: Metadata = { title: 'All entries' };
 
 export default function AdminEntriesPage() {
   return (
-    <RequirePermission permission="entries:read:all">
+    <RequirePermission permission="ADMIN">
       <AdminEntriesView />
     </RequirePermission>
   );

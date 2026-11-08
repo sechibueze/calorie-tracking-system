@@ -13,6 +13,6 @@ export const navigation: NavItemConfig[] = [
   { label: 'Dashboard', href: '/dashboard', icon: 'home' },
   { label: 'Food Entries', href: '/entries', icon: 'list' },
   { label: 'Profile', href: '/profile', icon: 'user' },
-  { label: 'All Entries', href: '/admin/entries', icon: 'shield', permission: 'entries:read:all', section: 'Admin' },
-  { label: 'Reports', href: '/admin/reports', icon: 'chart', permission: 'reports:read', section: 'Admin' },
+  { label: 'All Entries', href: '/admin/entries', icon: 'shield', permission: 'ADMIN', section: 'Admin' },
+  { label: 'Reports', href: '/admin/reports', icon: 'chart', permission: 'ADMIN', section: 'Admin' },
 ];

@@ -85,7 +85,7 @@ export function EntryForm({ entry, users, onSubmit, onCancel }: EntryFormProps) 
         onBlur={name.onBlur}
         onTextChange={(text) => {
           form.setValue('name', text);
-          if (form.values.fdcId) clearFoodLink(); // the text no longer matches the chosen food
+          if (form.values.fdcId) clearFoodLink(); 
         }}
         onSelect={selectSuggestion}
       />

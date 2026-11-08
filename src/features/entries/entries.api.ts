@@ -36,7 +36,7 @@ export const entriesApi = {
   },
 
   async suggestFoods(q: string, signal?: AbortSignal): Promise<{ suggestions: FoodSuggestion[]; degraded: boolean }> {
-    const { data } = await api.get<ApiSuccess<FoodSuggestion[]>>('/autocomplete/foods', { params: { q }, signal });
+    const { data } = await api.get<ApiSuccess<FoodSuggestion[]>>('/entries/suggest', { params: { q }, signal });
     return { suggestions: data.data, degraded: Boolean(data.meta?.degraded) };
   },
 };

@@ -6,7 +6,7 @@ export const metadata: Metadata = { title: 'Reports' };
 
 export default function AdminReportsPage() {
   return (
-    <RequirePermission permission="reports:read">
+    <RequirePermission permission="ADMIN">
       <AdminReportView />
     </RequirePermission>
   );
