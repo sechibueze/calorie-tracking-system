@@ -11,8 +11,8 @@ const HEAVY_EXTRAS = [
   { name: 'Soda', calories: 150, hour: 22 },
 ];
 const DEMO_USERS = [
-  { email: 'alice@calorie.test', skip: [] as string[] },
-  { email: 'bob@calorie.test', skip: ['Apple'] }, // Bob's limit is 1800, so a normal day stays under
+  { email: 'eben@calorie.com', skip: [] as string[] },
+  { email: 'admin@calorie.com', skip: ['Apple'] }, // Bob's limit is 1800, so a normal day stays under
 ];
 const DAYS = 14;
 

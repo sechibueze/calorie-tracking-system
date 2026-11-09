@@ -30,7 +30,7 @@ export const validateRequest = <S extends ZodType>(
         throw new ValidationError(
           `Invalid request ${target}`,
           Object.entries(result.errors).map(([field, message]) => ({
-            field: field === 'root' ? target : `${target}.${field}`,
+            field: field === 'root' ? target : `${field}`,
             message,
             code: 'INVALID_INPUT',
           })),

@@ -8,9 +8,23 @@ const SEED_TOKEN_NAME = 'seed';
 export const SEED_USERS = [
   {
     email: 'admin@calorie.com',
-    name: 'Ada Admin',
+    name: 'Ben Admin',
     role: 'ADMIN',
     dailyCalorieLimit: 2100,
+    password: env.SEED_ADMIN_TOKEN ,
+  },
+  {
+    email: 'samuel@calorie.com',
+    name: 'Samuel Chibueze',
+    role: 'USER',
+    dailyCalorieLimit: 2100,
+    password: env.SEED_ADMIN_TOKEN ,
+  },
+  {
+    email: 'eben@calorie.com',
+    name: 'Eben Chibueze',
+    role: 'USER',
+    dailyCalorieLimit: 1800,
     password: env.SEED_ADMIN_TOKEN ,
   },
 ] as const;

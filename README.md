@@ -2,6 +2,8 @@
 
 REST API for a calorie-tracking app. Users log what they eat, get a warning on every day they reach their calorie limit, and admins manage all entries and see a weekly report.
 
+[CalTrack Demo](https://drive.google.com/file/d/13-o8eP5E6jWJT3oEA6cwL0MzhhKfTf0S/view?usp=sharing)
+
 ## Features
 
 - Food entries (name, calories, date/time) with filters by date range and a per-day summary
@@ -24,10 +26,6 @@ npm install
 npx prisma migrate dev               # apply migrations
 npm run db:seed                      # roles, demo users, tokens, 2 weeks of entries
 npm run dev                          # http://localhost:3000
-```
-
-```bash
-curl localhost:3000/api/v1/auth/me -H "Authorization: Bearer <token>"
 ```
 
 ## Demo users and tokens
